@@ -3,6 +3,7 @@
 package org.kxtra.swing.graphics
 
 import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.Image
 import java.awt.geom.Point2D
 
@@ -24,4 +25,12 @@ fun Graphics.drawPoint(point: Point2D) {
 
 fun Graphics.drawPoint(x: Int, y: Int) {
     drawLine(x, y, x, y)
+}
+
+fun Graphics.drawString(string: String, point: Point2D) {
+    drawString(string, point.x.toInt(), point.y.toInt())
+}
+
+fun Graphics2D.drawString(string: String, point: Point2D) {
+    drawString(string, point.x.toFloat(), point.y.toFloat())
 }

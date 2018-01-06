@@ -17,7 +17,3 @@ fun Graphics2D.create2D(): Graphics2D = create() as? Graphics2D? ?: throw Unsupp
 fun Graphics2D.drawTextLayout(textLayout: TextLayout, point: Point2D) {
     textLayout.draw(this, point.x.toFloat(), point.y.toFloat())
 }
-
-fun Graphics2D.drawString(string: String, point: Point2D) {
-    drawString(string, point.x.toFloat(), point.y.toFloat())
-}
