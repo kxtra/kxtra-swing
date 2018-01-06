@@ -1,4 +1,4 @@
-# kxtra-slf4j
+# kxtra-swing
 
 [![](https://jitpack.io/v/org.kxtra/kxtra-swing.svg)](https://jitpack.io/#org.kxtra/kxtra-swing)
 
