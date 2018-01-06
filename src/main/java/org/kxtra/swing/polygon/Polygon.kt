@@ -6,9 +6,9 @@ import java.awt.Polygon
 import java.awt.geom.Point2D
 
 /**
- * @return a new [Polygon] containing the elements of [points] in iteration order
+ * @return a new [Polygon] containing the elements of [points]
  */
-fun Polygon(points: Collection<Point2D>): Polygon {
+fun Polygon(points: List<Point2D>): Polygon {
     val xs = IntArray(points.size)
     val ys = IntArray(points.size)
     points.forEachIndexed { i, pt ->
