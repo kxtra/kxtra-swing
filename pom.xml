@@ -27,11 +27,6 @@
         </dependency>
         <dependency>
             <groupId>org.swinglabs.swingx</groupId>
-            <artifactId>swingx-graphics</artifactId>
-            <version>${swingx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.swinglabs.swingx</groupId>
             <artifactId>swingx-common</artifactId>
             <version>${swingx.version}</version>
         </dependency>
