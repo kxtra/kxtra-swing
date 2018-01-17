@@ -46,7 +46,7 @@ operator fun Point.minus(dimension: Dimension2D): Point2D {
 }
 
 fun Point.copyOf(): Point {
-    return location
+    return Point(this)
 }
 
 

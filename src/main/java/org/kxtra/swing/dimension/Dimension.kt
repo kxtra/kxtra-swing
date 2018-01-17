@@ -28,3 +28,7 @@ operator fun Dimension.div(n: Double): Dimension {
 operator fun Dimension.div(n: Int): Dimension {
     return Dimension(width / n, height / n)
 }
+
+fun Dimension.copyOf(): Dimension {
+    return Dimension(this)
+}
