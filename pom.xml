@@ -10,6 +10,17 @@
     <packaging>jar</packaging>
 
     <name>kxtra-swing</name>
+    <description>Kotlin extensions for Swing/AWT</description>
+    <url>https://github.com/kxtra/kxtra-swing</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +28,7 @@
 
         <kotlin.version>1.2.20</kotlin.version>
         <swingx.version>1.6.5-1</swingx.version>
+        <maven-source.version>2.2.1</maven-source.version>
     </properties>
 
     <dependencies>
@@ -44,6 +56,19 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
