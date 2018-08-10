@@ -2,24 +2,12 @@
 
 package org.kxtra.swing.bufferedimage
 
-import org.jdesktop.swingx.util.GraphicsUtilities
-import java.awt.Image
 import java.awt.image.BufferedImage
+import java.util.Hashtable
 
-/**
- * Creates a new compatible copy of [image].
- *
- * @see[java.awt.GraphicsConfiguration.createCompatibleImage]
- */
-fun BufferedImage(image: Image): BufferedImage {
-    return GraphicsUtilities.convertToBufferedImage(image)
-}
-
-/**
- * Returns a new compatible copy of this image, or `this` if already compatible.
- *
- * @see[java.awt.GraphicsConfiguration.createCompatibleImage]
- */
-fun BufferedImage.toCompatibleImage(): BufferedImage {
-    return GraphicsUtilities.toCompatibleImage(this)
+val BufferedImage.properties: Hashtable<String, Any>? get() {
+    val keys = propertyNames ?: return null
+    val table = Hashtable<String, Any>(keys.size * 2)
+    for (key in keys) table[key] = getProperty(key)
+    return table
 }
