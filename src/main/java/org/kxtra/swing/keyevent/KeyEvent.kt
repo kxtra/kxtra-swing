@@ -7,4 +7,4 @@ import java.awt.event.KeyEvent
 /**
  * @see[KeyEvent.getKeyText]
  */
-fun KeyEvent.keyText(): String = KeyEvent.getKeyText(keyCode)
+val KeyEvent.keyText: String get() = KeyEvent.getKeyText(keyCode)

@@ -7,6 +7,4 @@ import java.awt.event.InputEvent
 /**
  * @see[InputEvent.getModifiersExText]
  */
-fun InputEvent.modifiersExText(): String {
-    return InputEvent.getModifiersExText(modifiersEx)
-}
+val InputEvent.modifiersExText: String get() = InputEvent.getModifiersExText(modifiersEx)

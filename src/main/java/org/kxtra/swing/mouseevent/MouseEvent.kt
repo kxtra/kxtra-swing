@@ -8,14 +8,14 @@ import javax.swing.SwingUtilities
 /**
  * @see[SwingUtilities.isLeftMouseButton]
  */
-val MouseEvent.isLeftButton get() = SwingUtilities.isLeftMouseButton(this)
+val MouseEvent.isLeftButton: Boolean get() = SwingUtilities.isLeftMouseButton(this)
 
 /**
  * @see[SwingUtilities.isRightMouseButton]
  */
-val MouseEvent.isRightButton get() = SwingUtilities.isRightMouseButton(this)
+val MouseEvent.isRightButton: Boolean get() = SwingUtilities.isRightMouseButton(this)
 
 /**
  * @see[SwingUtilities.isMiddleMouseButton]
  */
-val MouseEvent.isMiddleButton get() = SwingUtilities.isMiddleMouseButton(this)
+val MouseEvent.isMiddleButton: Boolean get() = SwingUtilities.isMiddleMouseButton(this)

@@ -5,6 +5,6 @@ package org.kxtra.swing.toolkit
 import java.awt.RenderingHints
 import java.awt.Toolkit
 
-fun Toolkit.fontDesktopHints(): RenderingHints? {
+val Toolkit.fontDesktopHints: RenderingHints? get() {
     return getDesktopProperty("awt.font.desktophints") as? RenderingHints?
 }
