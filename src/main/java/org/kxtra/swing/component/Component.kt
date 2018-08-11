@@ -9,6 +9,4 @@ import javax.swing.SwingUtilities
 /**
  * @see[SwingUtilities.getWindowAncestor]
  */
-fun Component.windowAncestor(): Window? {
-    return SwingUtilities.getWindowAncestor(this)
-}
+val Component.window: Window? get() = SwingUtilities.getWindowAncestor(this)
