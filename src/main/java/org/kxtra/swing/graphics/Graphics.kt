@@ -29,3 +29,15 @@ fun Graphics.drawPoint(x: Int, y: Int) {
 fun Graphics.drawString(string: String, point: Point) {
     drawString(string, point.x, point.y)
 }
+
+/**
+ * Executes the given [block] function on [this] and then calls [Graphics.dispose] whether an exception
+ * is thrown or not.
+ */
+inline fun <T: Graphics, R> T.use(block: (T) -> R): R {
+    try {
+        return block(this)
+    } finally {
+        dispose()
+    }
+}
