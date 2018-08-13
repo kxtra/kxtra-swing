@@ -2,84 +2,42 @@
 
 package org.kxtra.swing.bufferedimage
 
-import org.kxtra.swing.graphics.use
+import org.kxtra.swing.image.draw
 import org.kxtra.swing.image.height
 import org.kxtra.swing.image.width
 import org.kxtra.swing.renderedimage.properties
 import java.awt.Image
 import java.awt.image.BufferedImage
-import java.awt.image.ColorModel
-import java.awt.image.IndexColorModel
-import java.util.Hashtable
+import java.awt.image.RenderedImage
+import javax.imageio.ImageTypeSpecifier
 
 /**
- * Creates a copy of [bufferedImage]
+ * Creates a copy of [renderedImage]
  */
-fun BufferedImage(bufferedImage: BufferedImage): BufferedImage {
+fun BufferedImage(renderedImage: RenderedImage): BufferedImage {
+    val cm = checkNotNull(renderedImage.colorModel)
     return BufferedImage(
-            bufferedImage.colorModel,
-            bufferedImage.copyData(null),
-            bufferedImage.isAlphaPremultiplied,
-            bufferedImage.properties
+            cm,
+            renderedImage.copyData(null),
+            cm.isAlphaPremultiplied,
+            renderedImage.properties
     )
 }
 
 /**
- * Creates a copy of [image] with [imageType]
- */
-fun BufferedImage(image: Image, imageType: Int): BufferedImage {
-    return BufferedImage(image.width, image.height, imageType).draw(image)
-}
-
-/**
- * Creates a copy of [image] with [imageType] and [indexedColorModel]
+ * Creates a copy of [image] with [imageTypeSpecifier]
  */
 fun BufferedImage(
         image: Image,
-        imageType: Int,
-        indexedColorModel: IndexColorModel
+        imageTypeSpecifier: ImageTypeSpecifier
 ): BufferedImage {
-    return BufferedImage(image.width, image.height, imageType, indexedColorModel).draw(image)
+    return BufferedImage(imageTypeSpecifier, image.width, image.height).apply { draw(image) }
 }
 
-/**
- * Creates a copy of [image] with [colorModel] and [properties]
- */
 fun BufferedImage(
-        image: Image,
-        colorModel: ColorModel,
-        properties: Hashtable<String, Any>? = null
-): BufferedImage {
-    return BufferedImage(colorModel, image.width, image.height, properties).draw(image)
-}
-
-/**
- * Creates a new image
- */
-fun BufferedImage(
-        colorModel: ColorModel,
+        imageTypeSpecifier: ImageTypeSpecifier,
         width: Int,
-        height: Int,
-        properties: Hashtable<String, Any>? = null
+        height: Int
 ): BufferedImage {
-    return BufferedImage(
-            colorModel,
-            colorModel.createCompatibleWritableRaster(width, height),
-            colorModel.isAlphaPremultiplied,
-            properties
-    )
-}
-
-/**
- * Draws [image] onto [this] scaled using [renderingHints]. Returns [this].
- */
-fun <T : BufferedImage> T.draw(
-        image: Image,
-        renderingHints: Map<Any, Any>? = null
-): T {
-    createGraphics().use {
-        if (renderingHints != null) it.setRenderingHints(renderingHints)
-        it.drawImage(image, 0, 0, width, height, null)
-    }
-    return this
+    return imageTypeSpecifier.createBufferedImage(width, height)
 }
