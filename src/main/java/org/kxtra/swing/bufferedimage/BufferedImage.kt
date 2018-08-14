@@ -8,7 +8,10 @@ import org.kxtra.swing.image.width
 import org.kxtra.swing.renderedimage.properties
 import java.awt.Image
 import java.awt.image.BufferedImage
+import java.awt.image.ColorModel
 import java.awt.image.RenderedImage
+import java.awt.image.WritableRaster
+import java.util.Hashtable
 import javax.imageio.ImageTypeSpecifier
 
 /**
@@ -40,4 +43,13 @@ fun BufferedImage(
         imageTypeSpecifier: ImageTypeSpecifier
 ): BufferedImage {
     return imageTypeSpecifier.createBufferedImage(width, height)
+}
+
+fun BufferedImage(
+        colorModel: ColorModel,
+        raster: WritableRaster,
+        isRasterPremultiplied: Boolean = colorModel.isAlphaPremultiplied,
+        properties: Hashtable<Any, Any>? = null
+): BufferedImage {
+    return BufferedImage(colorModel, raster, isRasterPremultiplied, properties)
 }
