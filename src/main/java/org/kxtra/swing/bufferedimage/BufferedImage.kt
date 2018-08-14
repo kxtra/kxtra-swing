@@ -31,13 +31,13 @@ fun BufferedImage(
         image: Image,
         imageTypeSpecifier: ImageTypeSpecifier
 ): BufferedImage {
-    return BufferedImage(imageTypeSpecifier, image.width, image.height).apply { draw(image) }
+    return BufferedImage(image.width, image.height, imageTypeSpecifier).apply { draw(image) }
 }
 
 fun BufferedImage(
-        imageTypeSpecifier: ImageTypeSpecifier,
         width: Int,
-        height: Int
+        height: Int,
+        imageTypeSpecifier: ImageTypeSpecifier
 ): BufferedImage {
     return imageTypeSpecifier.createBufferedImage(width, height)
 }

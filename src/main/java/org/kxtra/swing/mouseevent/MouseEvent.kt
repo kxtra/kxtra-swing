@@ -3,10 +3,9 @@
 package org.kxtra.swing.mouseevent
 
 import java.awt.event.MouseEvent
-import javax.swing.SwingUtilities
 
-val MouseEvent.isLeftButton: Boolean get() = SwingUtilities.isLeftMouseButton(this)
+val MouseEvent.isLeftButton: Boolean get() = button == MouseEvent.BUTTON1
 
-val MouseEvent.isRightButton: Boolean get() = SwingUtilities.isRightMouseButton(this)
+val MouseEvent.isMiddleButton: Boolean get() = button == MouseEvent.BUTTON2
 
-val MouseEvent.isMiddleButton: Boolean get() = SwingUtilities.isMiddleMouseButton(this)
+val MouseEvent.isRightButton: Boolean get() = button == MouseEvent.BUTTON3
