@@ -2,7 +2,7 @@
 
 package org.kxtra.swing.bufferedimage
 
-import org.kxtra.swing.image.draw
+import org.kxtra.swing.image.fill
 import org.kxtra.swing.image.height
 import org.kxtra.swing.image.width
 import org.kxtra.swing.renderedimage.properties
@@ -34,7 +34,7 @@ fun BufferedImage(
         image: Image,
         imageTypeSpecifier: ImageTypeSpecifier
 ): BufferedImage {
-    return BufferedImage(image.width, image.height, imageTypeSpecifier).apply { draw(image) }
+    return BufferedImage(image.width, image.height, imageTypeSpecifier).apply { fill(image) }
 }
 
 fun BufferedImage(
@@ -49,7 +49,7 @@ fun BufferedImage(
         colorModel: ColorModel,
         raster: WritableRaster,
         isRasterPremultiplied: Boolean = colorModel.isAlphaPremultiplied,
-        properties: Hashtable<Any, Any>? = null
+        properties: Hashtable<*, *>? = null
 ): BufferedImage {
     return BufferedImage(colorModel, raster, isRasterPremultiplied, properties)
 }
