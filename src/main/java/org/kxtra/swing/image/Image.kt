@@ -3,6 +3,7 @@
 package org.kxtra.swing.image
 
 import org.kxtra.swing.bufferedimage.BufferedImage
+import org.kxtra.swing.colormodel.createCompatibleWritableRaster
 import org.kxtra.swing.databuffer.DataBufferInt
 import org.kxtra.swing.graphics.use
 import java.awt.AlphaComposite
@@ -77,10 +78,8 @@ fun Image.getArgb(
     if (this is BufferedImage && type == BufferedImage.TYPE_INT_ARGB) {
         raster.getDataElements(x, y, w, h, output)
     } else {
-        val db = DataBufferInt(output)
         val cm = ColorModel.getRGBdefault()
-        val sm = cm.createCompatibleSampleModel(w, h)
-        val wr = Raster.createWritableRaster(sm, db, null)
+        val wr = cm.createCompatibleWritableRaster(w, h, DataBufferInt(output))
         BufferedImage(cm, wr).copyRegion(this, x, y)
     }
     return output
