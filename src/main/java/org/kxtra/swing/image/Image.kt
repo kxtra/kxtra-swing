@@ -45,6 +45,22 @@ fun Image.fill(
     }
 }
 
+/**
+ * Copies onto [this] a region of [image] with the top-left corner at ([x], [y]) and the dimensions of [this]
+ */
+fun Image.copyRegion(
+        image: Image,
+        x: Int,
+        y: Int
+) {
+    createGraphics().use { g ->
+        g.composite = AlphaComposite.Src
+        val w = width
+        val h = height
+        g.drawImage(image, 0, 0, w, h, x, y, x + w, y + h, null)
+    }
+}
+
 fun Image.clear() {
     createGraphics().use { g ->
         g.composite = AlphaComposite.Clear
@@ -63,20 +79,17 @@ fun Image.getArgb(
     if (this is BufferedImage && type == BufferedImage.TYPE_INT_ARGB) {
         raster.getDataElements(x, y, w, h, output)
     } else {
-        val buf = DataBufferInt(output, output.size)
+        val db = DataBufferInt(output, output.size)
         val cm = ColorModel.getRGBdefault()
         val sm = cm.createCompatibleSampleModel(w, h)
-        val wr = Raster.createWritableRaster(sm, buf, null)
-        BufferedImage(cm, wr).createGraphics().use { g ->
-            g.composite = AlphaComposite.Src
-            g.drawImage(this, 0, 0, w, h, x, y, x + w, y + h, null)
-        }
+        val wr = Raster.createWritableRaster(sm, db, null)
+        BufferedImage(cm, wr).copyRegion(this, x, y)
     }
     return output
 }
 
 fun Image.getArgb(
-        rgbArray: IntArray? = null
+        outData: IntArray? = null
 ): IntArray {
-    return getArgb(0, 0, width, height, rgbArray)
+    return getArgb(0, 0, width, height, outData)
 }
