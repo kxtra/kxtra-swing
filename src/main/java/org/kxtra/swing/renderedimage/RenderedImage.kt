@@ -10,7 +10,7 @@ val RenderedImage.imageTypeSpecifier: ImageTypeSpecifier get() = ImageTypeSpecif
 
 val RenderedImage.properties: Hashtable<String, Any>? get() {
     val keys = propertyNames ?: return null
-    return Hashtable<String, Any>(keys.size * 2).apply {
+    return Hashtable<String, Any>(keys.size, 1f).apply {
         for (key in keys) put(key, getProperty(key))
     }
 }

@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage
 import java.awt.image.ColorModel
 import java.awt.image.RenderedImage
 import java.awt.image.WritableRaster
-import java.util.Hashtable
 import javax.imageio.ImageTypeSpecifier
 
 /**
@@ -37,6 +36,16 @@ fun BufferedImage(
     return BufferedImage(image.width, image.height, imageTypeSpecifier).apply { fill(image) }
 }
 
+/**
+ * Creates a copy of [image] with [imageType]
+ */
+fun BufferedImage(
+        image: Image,
+        imageType: Int
+): BufferedImage {
+    return BufferedImage(image.width, image.height, imageType).apply { fill(image) }
+}
+
 fun BufferedImage(
         width: Int,
         height: Int,
@@ -48,8 +57,7 @@ fun BufferedImage(
 fun BufferedImage(
         colorModel: ColorModel,
         raster: WritableRaster,
-        isRasterPremultiplied: Boolean = colorModel.isAlphaPremultiplied,
-        properties: Hashtable<*, *>? = null
+        isRasterPremultiplied: Boolean = colorModel.isAlphaPremultiplied
 ): BufferedImage {
-    return BufferedImage(colorModel, raster, isRasterPremultiplied, properties)
+    return BufferedImage(colorModel, raster, isRasterPremultiplied, null)
 }
