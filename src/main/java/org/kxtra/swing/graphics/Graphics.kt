@@ -36,9 +36,9 @@ fun Graphics.drawString(string: String, point: Point) {
  * Executes the given [block] function on [this] and then calls [Graphics.dispose] whether an exception
  * is thrown or not.
  */
-inline fun <T: Graphics, R> T.use(block: (T) -> R): R {
+inline fun <T: Graphics> T.use(block: (T) -> Unit) {
     try {
-        return block(this)
+        block(this)
     } finally {
         dispose()
     }
