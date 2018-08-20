@@ -2,15 +2,11 @@
 
 package org.kxtra.swing.image
 
-import org.kxtra.swing.bufferedimage.BufferedImage
-import org.kxtra.swing.colormodel.createCompatibleWritableRaster
-import org.kxtra.swing.databuffer.DataBufferInt
 import org.kxtra.swing.graphics.use
-import java.awt.AlphaComposite
-import java.awt.Graphics2D
-import java.awt.Image
-import java.awt.Paint
+import java.awt.*
 import java.awt.image.*
+import java.util.*
+import javax.imageio.ImageTypeSpecifier
 
 val Image.width: Int get() = getWidth(null)
 
@@ -90,3 +86,94 @@ fun Image.getArgb(
 ): IntArray {
     return getArgb(0, 0, width, height, outData)
 }
+
+val RenderedImage.imageTypeSpecifier: ImageTypeSpecifier get() = ImageTypeSpecifier(this)
+
+val RenderedImage.properties: Hashtable<String, Any>? get() {
+    val keys = propertyNames ?: return null
+    return Hashtable<String, Any>(keys.size, 1f).apply {
+        for (key in keys) put(key, getProperty(key))
+    }
+}
+
+/**
+ * Creates a copy of [renderedImage]
+ */
+fun BufferedImage(renderedImage: RenderedImage): BufferedImage {
+    val cm = checkNotNull(renderedImage.colorModel)
+    return BufferedImage(
+            cm,
+            renderedImage.copyData(null),
+            cm.isAlphaPremultiplied,
+            renderedImage.properties
+    )
+}
+
+/**
+ * Creates a copy of [image] with [imageTypeSpecifier]
+ */
+fun BufferedImage(
+        image: Image,
+        imageTypeSpecifier: ImageTypeSpecifier
+): BufferedImage {
+    return BufferedImage(image.width, image.height, imageTypeSpecifier).apply { fill(image) }
+}
+
+/**
+ * Creates a copy of [image] with [imageType]
+ */
+fun BufferedImage(
+        image: Image,
+        imageType: Int
+): BufferedImage {
+    return BufferedImage(image.width, image.height, imageType).apply { fill(image) }
+}
+
+fun BufferedImage(
+        width: Int,
+        height: Int,
+        imageTypeSpecifier: ImageTypeSpecifier
+): BufferedImage {
+    return imageTypeSpecifier.createBufferedImage(width, height)
+}
+
+fun BufferedImage(
+        colorModel: ColorModel,
+        raster: WritableRaster,
+        isRasterPremultiplied: Boolean = colorModel.isAlphaPremultiplied
+): BufferedImage {
+    return BufferedImage(colorModel, raster, isRasterPremultiplied, null)
+}
+
+fun ImageTypeSpecifier(colorModel: ColorModel): ImageTypeSpecifier {
+    return ImageTypeSpecifier(colorModel, colorModel.createCompatibleSampleModel(1, 1))
+}
+
+operator fun ImageTypeSpecifier.component1(): ColorModel = colorModel
+
+operator fun ImageTypeSpecifier.component2(): SampleModel = sampleModel
+
+fun ColorModel.createCompatibleWritableRaster(
+        w: Int,
+        h: Int,
+        db: DataBuffer,
+        location: Point? = null
+): WritableRaster {
+    return Raster.createWritableRaster(
+            createCompatibleSampleModel(w, h),
+            db,
+            location
+    )
+}
+
+fun DataBufferByte(dataArray: ByteArray): DataBufferByte = DataBufferByte(dataArray, dataArray.size)
+
+fun DataBufferShort(dataArray: ShortArray): DataBufferShort = DataBufferShort(dataArray, dataArray.size)
+
+fun DataBufferUShort(dataArray: ShortArray): DataBufferUShort = DataBufferUShort(dataArray, dataArray.size)
+
+fun DataBufferInt(dataArray: IntArray): DataBufferInt = DataBufferInt(dataArray, dataArray.size)
+
+fun DataBufferFloat(dataArray: FloatArray): DataBufferFloat = DataBufferFloat(dataArray, dataArray.size)
+
+fun DataBufferDouble(dataArray: DoubleArray): DataBufferDouble = DataBufferDouble(dataArray, dataArray.size)

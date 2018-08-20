@@ -3,8 +3,10 @@
 package org.kxtra.swing.graphics
 
 import java.awt.Graphics
+import java.awt.Graphics2D
 import java.awt.Image
 import java.awt.Point
+import java.awt.font.TextLayout
 
 fun Graphics.drawImage(image: Image): Boolean {
     return drawImage(image, 0, 0, null)
@@ -40,4 +42,12 @@ inline fun <T: Graphics, R> T.use(block: (T) -> R): R {
     } finally {
         dispose()
     }
+}
+
+fun Graphics2D.create2D(): Graphics2D {
+    return create() as? Graphics2D? ?: throw UnsupportedOperationException()
+}
+
+fun Graphics2D.drawTextLayout(textLayout: TextLayout, x: Float, y: Float) {
+    textLayout.draw(this, x, y)
 }
