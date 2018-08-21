@@ -87,13 +87,20 @@ fun Image.getArgb(
     return getArgb(0, 0, width, height, outData)
 }
 
+fun RenderedImage.getPropertyOrNull(name: String): Any? {
+    val value = getProperty(name)
+    return if (value == Image.UndefinedProperty) null else value
+}
+
 val RenderedImage.imageTypeSpecifier: ImageTypeSpecifier get() = ImageTypeSpecifier(this)
 
 val RenderedImage.properties: Hashtable<String, Any>? get() {
     val keys = propertyNames ?: return null
-    return Hashtable<String, Any>(keys.size, 1f).apply {
-        for (key in keys) put(key, getProperty(key))
+    val table = Hashtable<String, Any>(keys.size, 1f)
+    for (key in keys) {
+        table[key] = getPropertyOrNull(key) ?: continue
     }
+    return table
 }
 
 /**
