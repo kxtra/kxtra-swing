@@ -8,6 +8,7 @@ import java.awt.Polygon
 import java.awt.geom.Dimension2D
 import java.awt.geom.Path2D
 import java.awt.geom.Point2D
+import java.awt.geom.RectangularShape
 
 operator fun Dimension2D.component1(): Double = width
 
@@ -33,6 +34,17 @@ fun Polygon.addPoint(point: Point) = addPoint(point.x, point.y)
 
 operator fun Polygon.plusAssign(point: Point) = addPoint(point)
 
+fun Polygon(initialCapacity: Int): Polygon {
+    require(initialCapacity >= 0)
+    val empty = IntArray(0)
+    val poly = Polygon(empty, empty, 0)
+    if (initialCapacity > 0) {
+        poly.xpoints = IntArray(initialCapacity)
+        poly.ypoints = IntArray(initialCapacity)
+    }
+    return poly
+}
+
 fun Path2D.moveTo(point: Point2D) = moveTo(point.x, point.y)
 
 fun Path2D.lineTo(point: Point2D) = lineTo(point.x, point.y)
@@ -44,3 +56,5 @@ fun Path2D.Float.lineTo(point: Point) = lineTo(point.x.toFloat(), point.y.toFloa
 fun Path2D.Float.moveTo(point: Point2D.Float) = moveTo(point.x, point.y)
 
 fun Path2D.Float.lineTo(point: Point2D.Float) = lineTo(point.x, point.y)
+
+val RectangularShape.center: Point2D.Double get() = Point2D.Double(centerX, centerY)
