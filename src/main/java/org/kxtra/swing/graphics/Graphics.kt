@@ -8,16 +8,12 @@ import java.awt.Image
 import java.awt.Point
 import java.awt.font.TextLayout
 
-fun Graphics.drawImage(image: Image): Boolean {
-    return drawImage(image, 0, 0, null)
-}
-
-fun Graphics.drawImage(image: Image, point: Point): Boolean {
-    return drawImage(image, point.x, point.y, null)
-}
-
 fun Graphics.drawImage(image: Image, x: Int, y: Int): Boolean {
     return drawImage(image, x, y, null)
+}
+
+fun Graphics.drawImage(image: Image, x: Int, y: Int, w: Int, h: Int): Boolean {
+    return drawImage(image, x, y, w, h, null)
 }
 
 fun Graphics.drawPoint(point: Point) {
@@ -36,7 +32,7 @@ fun Graphics.drawString(string: String, point: Point) {
  * Executes the given [block] function on [this] and then calls [Graphics.dispose] whether an exception
  * is thrown or not.
  */
-inline fun <T: Graphics> T.use(block: (T) -> Unit) {
+inline fun <T : Graphics> T.use(block: (T) -> Unit) {
     try {
         block(this)
     } finally {

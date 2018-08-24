@@ -2,6 +2,7 @@
 
 package org.kxtra.swing.image
 
+import org.kxtra.swing.graphics.drawImage
 import org.kxtra.swing.graphics.use
 import java.awt.*
 import java.awt.image.*
@@ -24,7 +25,7 @@ fun Image.fill(
     createGraphics().use { g ->
         g.composite = AlphaComposite.Src
         if (renderingHints != null) g.setRenderingHints(renderingHints)
-        g.drawImage(image, 0, 0, width, height, null)
+        g.drawImage(image, 0, 0, width, height)
     }
 }
 

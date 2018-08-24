@@ -8,7 +8,6 @@ import java.awt.Polygon
 import java.awt.geom.Dimension2D
 import java.awt.geom.Path2D
 import java.awt.geom.Point2D
-import java.awt.geom.RectangularShape
 
 operator fun Dimension2D.component1(): Double = width
 
@@ -56,5 +55,3 @@ fun Path2D.Float.lineTo(point: Point) = lineTo(point.x.toFloat(), point.y.toFloa
 fun Path2D.Float.moveTo(point: Point2D.Float) = moveTo(point.x, point.y)
 
 fun Path2D.Float.lineTo(point: Point2D.Float) = lineTo(point.x, point.y)
-
-val RectangularShape.center: Point2D.Double get() = Point2D.Double(centerX, centerY)
