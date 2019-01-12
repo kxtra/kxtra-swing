@@ -6,8 +6,7 @@
 
     <groupId>org.kxtra</groupId>
     <artifactId>kxtra-swing</artifactId>
-    <version>1.0.3</version>
-    <packaging>jar</packaging>
+    <version>1.0.4-SNAPSHOT</version>
 
     <name>kxtra-swing</name>
     <description>Kotlin extensions for Swing/AWT</description>
