@@ -8,16 +8,6 @@ import javax.swing.*
 
 val Component.window: Window? get() = SwingUtilities.getWindowAncestor(this)
 
-var <E> JComboBox<E>.selected: E?
-    @Suppress("UNCHECKED_CAST")
-    get() = selectedItem as E?
-    set(value) { selectedItem = value }
-
-var <E> ComboBoxModel<E>.selected: E?
-    @Suppress("UNCHECKED_CAST")
-    get() = selectedItem as E?
-    set(value) { selectedItem = value }
-
 operator fun <E> ListModel<E>.get(index: Int): E = getElementAt(index)
 
 operator fun <E> MutableComboBoxModel<E>.plusAssign(element: E) = addElement(element)
