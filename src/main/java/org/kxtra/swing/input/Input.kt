@@ -3,7 +3,9 @@
 package org.kxtra.swing.input
 
 import java.awt.AWTKeyStroke
+import java.awt.event.ActionEvent
 import java.awt.event.InputEvent
+import java.awt.event.InvocationEvent
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import java.time.Instant
@@ -15,6 +17,10 @@ import javax.swing.KeyStroke
 val InputEvent.modifiersExText: String get() = InputEvent.getModifiersExText(modifiersEx)
 
 val InputEvent.instant: Instant get() = Instant.ofEpochMilli(`when`)
+
+val ActionEvent.instant: Instant get() = Instant.ofEpochMilli(`when`)
+
+val InvocationEvent.instant: Instant get() = Instant.ofEpochMilli(`when`)
 
 val InputEvent.isLeftMouseButtonDown: Boolean get() = (modifiersEx and InputEvent.BUTTON1_DOWN_MASK) != 0
 
