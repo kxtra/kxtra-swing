@@ -4,9 +4,25 @@ package org.kxtra.swing.image
 
 import org.kxtra.swing.graphics.drawImage
 import org.kxtra.swing.graphics.use
-import java.awt.*
-import java.awt.image.*
-import java.util.*
+import java.awt.AlphaComposite
+import java.awt.Graphics2D
+import java.awt.Image
+import java.awt.Paint
+import java.awt.Point
+import java.awt.image.BufferedImage
+import java.awt.image.ColorModel
+import java.awt.image.DataBuffer
+import java.awt.image.DataBufferByte
+import java.awt.image.DataBufferDouble
+import java.awt.image.DataBufferFloat
+import java.awt.image.DataBufferInt
+import java.awt.image.DataBufferShort
+import java.awt.image.DataBufferUShort
+import java.awt.image.Raster
+import java.awt.image.RenderedImage
+import java.awt.image.SampleModel
+import java.awt.image.WritableRaster
+import java.util.Hashtable
 import javax.imageio.ImageTypeSpecifier
 
 val Image.width: Int get() = getWidth(null)

@@ -4,7 +4,9 @@ package org.kxtra.swing.component
 
 import java.awt.Component
 import java.awt.Window
-import javax.swing.*
+import javax.swing.ListModel
+import javax.swing.MutableComboBoxModel
+import javax.swing.SwingUtilities
 
 val Component.window: Window? get() = SwingUtilities.getWindowAncestor(this)
 
