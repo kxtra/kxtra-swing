@@ -28,6 +28,10 @@ fun Graphics.drawString(string: String, point: Point) {
     drawString(string, point.x, point.y)
 }
 
+fun Graphics.drawChars(chars: CharArray, x: Int, y: Int) {
+    drawChars(chars, 0, chars.size, x, y)
+}
+
 /**
  * Executes the given [block] function on [this] and then calls [Graphics.dispose] whether an exception
  * is thrown or not.
