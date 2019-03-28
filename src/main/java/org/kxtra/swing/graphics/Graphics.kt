@@ -32,6 +32,10 @@ fun Graphics.drawChars(chars: CharArray, x: Int, y: Int) {
     drawChars(chars, 0, chars.size, x, y)
 }
 
+fun Graphics.drawChar(char: Char, x: Int, y: Int) {
+    drawChars(charArrayOf(char), x, y)
+}
+
 /**
  * Executes the given [block] function on [this] and then calls [Graphics.dispose] whether an exception
  * is thrown or not.
