@@ -3,6 +3,7 @@
 package org.kxtra.swing.geom
 
 import java.awt.Dimension
+import java.awt.Insets
 import java.awt.Point
 import java.awt.Polygon
 import java.awt.geom.Dimension2D
@@ -55,3 +56,11 @@ fun Path2D.Float.lineTo(point: Point) = lineTo(point.x.toFloat(), point.y.toFloa
 fun Path2D.Float.moveTo(point: Point2D.Float) = moveTo(point.x, point.y)
 
 fun Path2D.Float.lineTo(point: Point2D.Float) = lineTo(point.x, point.y)
+
+operator fun Insets.component1(): Int = top
+
+operator fun Insets.component2(): Int = left
+
+operator fun Insets.component3(): Int = bottom
+
+operator fun Insets.component4(): Int = right
