@@ -3,12 +3,15 @@
 package org.kxtra.swing.component
 
 import java.awt.Component
+import java.awt.Graphics2D
 import java.awt.Window
 import javax.swing.ListModel
 import javax.swing.MutableComboBoxModel
 import javax.swing.SwingUtilities
 
 val Component.window: Window? get() = SwingUtilities.getWindowAncestor(this)
+
+fun Component.createGraphics(): Graphics2D? = graphics?.let { it as? Graphics2D ?: throw UnsupportedOperationException() }
 
 operator fun <E> ListModel<E>.get(index: Int): E = getElementAt(index)
 
