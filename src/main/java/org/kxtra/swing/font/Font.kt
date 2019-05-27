@@ -1,5 +1,3 @@
-@file:JvmName("KxFont")
-
 package org.kxtra.swing.font
 
 import java.awt.Font

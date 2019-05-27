@@ -1,5 +1,3 @@
-@file:JvmName("KxGraphics")
-
 package org.kxtra.swing.graphics
 
 import java.awt.Graphics

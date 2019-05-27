@@ -1,5 +1,3 @@
-@file:JvmName("KxImage")
-
 package org.kxtra.swing.image
 
 import org.kxtra.swing.graphics.drawImage
@@ -124,7 +122,7 @@ val RenderedImage.properties: Hashtable<String, Any>? get() {
  * Creates a copy of [renderedImage]
  */
 fun BufferedImage(renderedImage: RenderedImage): BufferedImage {
-    val cm = checkNotNull(renderedImage.colorModel)
+    val cm = requireNotNull(renderedImage.colorModel)
     return BufferedImage(
             cm,
             renderedImage.copyData(null),

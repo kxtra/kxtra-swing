@@ -1,5 +1,3 @@
-@file:JvmName("KxInput")
-
 package org.kxtra.swing.input
 
 import java.awt.AWTKeyStroke
