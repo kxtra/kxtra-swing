@@ -47,9 +47,17 @@ inline fun <T : Graphics> T.use(block: (T) -> Unit) {
 }
 
 fun Graphics2D.create2D(): Graphics2D {
-    return create() as? Graphics2D? ?: throw UnsupportedOperationException()
+    return create().as2D()
+}
+
+fun Graphics2D.create2D(x: Int, y: Int, width: Int, height: Int): Graphics2D {
+    return create(x, y, width, height).as2D()
 }
 
 fun Graphics2D.drawTextLayout(textLayout: TextLayout, x: Float, y: Float) {
     textLayout.draw(this, x, y)
+}
+
+internal fun Graphics.as2D(): Graphics2D {
+    return this as? Graphics2D ?: throw UnsupportedOperationException()
 }

@@ -1,5 +1,6 @@
 package org.kxtra.swing.image
 
+import org.kxtra.swing.graphics.as2D
 import org.kxtra.swing.graphics.drawImage
 import org.kxtra.swing.graphics.use
 import java.awt.AlphaComposite
@@ -27,7 +28,7 @@ val Image.width: Int get() = getWidth(null)
 
 val Image.height: Int get() = getHeight(null)
 
-fun Image.createGraphics(): Graphics2D = graphics as? Graphics2D? ?: throw UnsupportedOperationException()
+fun Image.createGraphics(): Graphics2D = graphics.as2D()
 
 /**
  * Fills [this] with [image], scaled using [renderingHints] if necessary
@@ -38,7 +39,7 @@ fun Image.fill(
 ) {
     createGraphics().use { g ->
         g.composite = AlphaComposite.Src
-        if (renderingHints != null) g.setRenderingHints(renderingHints)
+        if (renderingHints != null) g.addRenderingHints(renderingHints)
         g.drawImage(image, 0, 0, width, height)
     }
 }
@@ -50,7 +51,7 @@ fun Image.fill(
     createGraphics().use { g ->
         g.paint = paint
         g.composite = AlphaComposite.Src
-        if (renderingHints != null) g.setRenderingHints(renderingHints)
+        if (renderingHints != null) g.addRenderingHints(renderingHints)
         g.fillRect(0, 0, width, height)
     }
 }
